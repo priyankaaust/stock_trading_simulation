@@ -1,0 +1,117 @@
+## Improved Database Schema for Stock Trading Simulation Game
+
+### Tables and Descriptions:
+
+**1. Users**
+   - `UserID` (PK): Unique identifier for each user.
+   - `Username` (Unique): User's chosen username.
+   - `Email` (Unique): User's email address.
+   - `PasswordHash`: Hashed password for security.
+   - `RegistrationDate`: Date and time the user registered.
+   - `LastLogin`: Timestamp of the last login.
+
+**2. Authentication**
+   - `AuthID` (PK): Unique identifier for each authentication record.
+   - `UserID` (FK): Links to Users.
+   - `PasswordSalt`: Salt for hashing the password.
+   - `PasswordHash`: Hashed password for verification.
+   - `LastPasswordChange`: Date of the last password change.
+
+**3. UserProfiles**
+   - `ProfileID` (PK): Unique identifier for each user profile.
+   - `UserID` (FK): Links to Users.
+   - `FirstName`: User's first name.
+   - `LastName`: User's last name.
+   - `Country`: User's country.
+   - `ProfileImage`: Path to the user's profile image.
+
+**4. Wallets**
+   - `WalletID` (PK): Unique identifier for each wallet.
+   - `UserID` (FK): Links to Users.
+   - `Balance`: Current balance of virtual money.
+
+**5. Stocks**
+   - `StockID` (PK): Unique identifier for each stock.
+   - `TickerSymbol`: Stock symbol.
+   - `CompanyName`: Full name of the company.
+   - `CurrentPrice`: Current stock price.
+
+**6. Transactions**
+   - `TransactionID` (PK): Unique identifier for each transaction.
+   - `UserID` (FK): Links to Users.
+   - `StockID` (FK): Links to Stocks.
+   - `Type`: Type of transaction (buy/sell).
+   - `Quantity`: Number of stocks traded.
+   - `PriceAtTransaction`: Price per stock at the transaction.
+   - `TransactionDate`: Date and time of the transaction.
+   - `Status`: Status of the transaction (Pending, Completed, Cancelled).
+
+**7. Portfolios**
+   - `PortfolioID` (PK): Unique identifier for each portfolio entry.
+   - `UserID` (FK): Links to Users.
+   - `StockID` (FK): Links to Stocks.
+   - `QuantityOwned`: Number of shares owned.
+
+**8. Leaderboards**
+   - `LeaderboardID` (PK): Unique identifier for the leaderboard entry.
+   - `UserID` (FK): Links to Users.
+   - `Rank`: User's rank.
+   - `TotalValue`: Total value of the user's portfolio.
+
+**9. GameSettings**
+   - `SettingID` (PK): Unique identifier for each game setting.
+   - `SettingName`: Name of the setting.
+   - `SettingValue`: Value of the setting.
+
+**10. GameSessions**
+   - `GameSessionID` (PK): Unique identifier for each game session.
+   - `StartTime`: Start time of the session.
+   - `EndTime`: End time of the session.
+   - `IsActive`: Whether the session is active.
+
+**11. Admins**
+   - `AdminID` (PK): Unique identifier for each admin.
+   - `Username`: Admin's username.
+   - `Email`: Admin's email.
+
+**12. AuditLogs**
+   - `LogID` (PK): Unique identifier for each log entry.
+   - `UserID` (FK, Nullable): Links to Users, null if system action.
+   - `ActionType`: Type of action performed.
+   - `Description`: Detailed description of the action.
+   - `ActionDate`: Date and time of the action.
+
+
+## Database Relationships for Stock Trading Simulation Game
+
+### Relationships:
+
+**1. Users and Authentication**
+   - One-to-One: Each `User` has one `Authentication` record.
+
+**2. Users and UserProfiles**
+   - One-to-One: Each `User` has one `UserProfile`.
+
+**3. Users and Wallets**
+   - One-to-One: Each `User` has one `Wallet`.
+
+**4. Users and Transactions**
+   - One-to-Many: Each `User` can have multiple `Transactions`.
+
+**5. Users and Portfolios**
+   - One-to-Many: Each `User` can have multiple `Portfolios`.
+
+**6. Users and Leaderboards**
+   - One-to-One: Each `User` has one entry on the `Leaderboard`.
+
+**7. Stocks and Transactions**
+   - One-to-Many: Each `Stock` can be involved in multiple `Transactions`.
+
+**8. Stocks and Portfolios**
+   - One-to-Many: Each `Stock` can be part of multiple `Portfolios`.
+
+**9. Users and AuditLogs**
+   - One-to-Many: Each `User` can have multiple entries in `AuditLogs` (nullable if action by system).
+
+
+

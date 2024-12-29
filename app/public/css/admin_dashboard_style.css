@@ -1,0 +1,265 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #1c1c1e;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: 20px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.sidebar h2 {
+    text-align: center;
+    color: #e60000;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.sidebar ul li a.active {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px; /* Offset by the sidebar width */
+    padding: 20px;
+    background-color: #f4f4f9;
+    min-height: 100vh; /* Ensures the main content area covers the full viewport height */
+    width: calc(100% - 250px); /* Full width minus sidebar */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e60000; /* Red background */
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Search Container */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f9;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #333;
+    width: 100%;
+    max-width: 400px;
+}
+
+.menu-icon {
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #e60000;
+}
+
+.search-bar {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+    margin-left: 10px;
+}
+
+.search-icon {
+    font-size: 18px;
+    margin-left: 10px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Profile Section */
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+/* Dynamic Content Area */
+#dynamic-content {
+    flex-grow: 1; /* Takes up all available space */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    overflow-y: auto; /* Allows scrolling if content is too tall */
+}
+
+/* Metric Boxes (Example for Dashboard Metrics) */
+.metrics {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.metric-box {
+    background-color: #f8f9fa;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.metric-box span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Chart Boxes */
+.charts {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.chart-box {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+
+
+/* Main container for the two-segment layout */
+.users-page-container {
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+/* Left Segment: User Details */
+.user-details {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-details h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.user-details p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Right Segment: User List */
+.user-list {
+    flex: 1;
+}
+
+.user-list h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* User Table Styling */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-table th, .user-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.user-table th {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* View Button Styling */
+.user-table button {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-table button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+

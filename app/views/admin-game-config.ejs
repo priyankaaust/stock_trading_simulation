@@ -1,0 +1,87 @@
+<%- include("admin-head.ejs") %>
+<link rel="stylesheet" href="/css/game_config.css"> <!-- Link to CSS for styling -->
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%- include("admin-sidebar-items.ejs") %>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="search-container">
+                    <i class="menu-icon">☰</i>
+                    <input type="text" placeholder="Search here" class="search-bar">
+                    <i class="search-icon">🔍</i>
+                </div>
+                <div class="user-profile">
+                    <img src="/path-to-profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+                </div>
+            </header>
+
+            <%- include("inc-alert-messages.ejs") %>
+    
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content">
+               <!-- home.ejs -->
+                
+               <!-- MAIN CONTENT STARTS FROM HERE -->
+                 <!-- Content here -->
+        <div class="game-config-container">
+            <!-- Left Section: Game Settings Form -->
+            <div class="config-form">
+                <h2>Game Settings</h2>
+                <form action="/admin/game/config" method="POST">
+                    <!-- Each setting field -->
+                    <!-- <div class="form-group">
+                        <label for="setting-simulation-speed">Simulation Speed:</label>
+                        <select id="setting-simulation-speed" name="simulation_speed">
+                            <option value="1">Normal</option>
+                            <option value="1.5">1.5x Speed</option>
+                            <option value="2">2x Speed</option>
+                            <option value="2.5">2.5x Speed</option>
+                        </select>
+                    </div> -->
+        
+                    <div class="form-group">
+                        <label for="starting_balance">Starting Balance ($):</label>
+                        <input type="number" id="starting_balance" name="starting_balance" placeholder="e.g., 100" value="<%= config.startingBalance %>" required>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="duration">Game duration (in minutes):</label>
+                        <input type="text" id="duration" name="game_duration" placeholder="e.g., 10" value="<%= config.gameDuration %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">Simulation Date Range: </label>
+                        <div  style="display: flex; gap: 8px;">
+                            <input type="date" id="sim_start_date" name="sim_start_date" value="<%= config['simStartDate'] %>" min="2022-01-01" max="2024-10-01">
+                            <input type="date" id="sim_end_date" name="sim_end_date" value="<%= config['simEndDate'] %>" min="2022-01-01" max="2024-10-01">
+                        </div>
+                    </div>
+        
+
+                    <button type="submit">Save Settings</button>
+                </form>
+            </div>
+        
+            <!-- Right Section: Game Session Management -->
+            
+        </div>
+        <!-- End of content -->
+               <!-- MAIN CONTENT ENDS  HERE -->
+
+            </div>
+        </main>
+
+       
+    </div>
+    
+</body>
+</html>
+
+

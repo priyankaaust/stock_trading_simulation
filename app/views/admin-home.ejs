@@ -1,0 +1,238 @@
+<%- include("admin-head.ejs") %>
+<link rel="stylesheet" href="/css/game_config.css"> <!-- Link to CSS for styling -->
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%- include("admin-sidebar-items.ejs") %>
+
+    
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="search-container">
+                    <i class="menu-icon">☰</i>
+                    <input type="text" placeholder="Search here" class="search-bar">
+                    <i class="search-icon">🔍</i>
+                </div>
+                <div class="user-profile">
+                    <img src="/path-to-profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+                </div>
+            </header>
+
+            <%- include("inc-alert-messages.ejs") %>
+
+            <div style="padding: 15px; margin: 10px 0 10px 0; background-color: black; color: white; border: 1px solid black; border-radius: 5px; font-family: Arial, sans-serif;">
+                This Game Simulator refreshes stock prices after every minute based on historical data
+            </div>
+    
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content">
+               <!-- home.ejs -->
+            <div class="home-container">
+                <div class="metrics">
+                    <div class="metric-box">
+                        <p>Active Users</p>
+                        <span><%= users.length %></span>
+                    </div>
+                    <div class="metric-box">
+                        <p>Total Stocks</p>
+                        <span><%= stocks.length %></span>
+                    </div>
+                    <div class="metric-box">
+                        <% if(!activeGameSession)  { %>
+                            <span style="margin-bottom: 20px;">No Game In Progress</span>
+                            <a href="/admin/start-game" id="start-session-btn" >Start New Session</a>
+                        <% } else {  %>
+                            <p>Countdown</p>
+                            <span id="countdown"></span>
+                        <% } %>
+ 
+                    </div>
+                </div>
+
+                
+
+                <div style="display: flex; gap: 10px;">
+
+                    <div class="user-list" style="margin-top: 20px; width: 100%; background-color: white; box-shadow: #42434d; padding: 10px; border-radius: 5px;">
+                        <h3>Leaderboard</h3>
+                    
+                        <table class="user-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>AAPL</th>
+                                    <th>GOOGL</th>
+                                    <th>MSFT</th>
+                                    <th>Available Balance</th>
+                                    <th>Total Balance</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-table-body">
+                                <!-- Sample data rows; replace with dynamic content as needed -->
+
+                                <% if(leaderBoard.length > 0) { %>
+                                    <% for(const p of leaderBoard) { %>
+                                        <tr>
+                                            <td> <%= p['userName'] %> </td>
+                                            <td> 
+                                                <p>Shares: <%= p['AAPL'] %> </p>
+                                                <p>Amount: $<%= p['AAPL_balance'].toFixed(2) %> </p>
+                                            </td>
+                                            <td>
+                                                <p>Shares: <%= p['GOOGL'] %> </p>
+                                                <p>Amount: $<%= p['GOOGL_balance'].toFixed(2) %> </p>
+                                            </td>
+                                            <td>
+                                                <p>Shares: <%= p['MSFT'] %> </p>
+                                                <p>Amount: $<%= p['MSFT_balance'].toFixed(2) %> </p>
+                                            </td>
+                                            <td>
+                                                $<%= p['availableBalance'].toFixed(2) %>
+                                            </td>
+                                            <td>
+                                                $ <strong style="font-size: 18px;"><%= p['currentBalance'].toFixed(2)  %></strong>
+                                            </td>
+                                            <td>
+                                                <a href="/home?portfolioUserId=<%= p['userId'] %>&portfolioUserName=<%= p['userName'] %>">
+                                                    Show progress graph
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                <% } else { %>
+
+                                    <tr>
+                                        <td colspan="7">
+                                            Leaderboard will show once users join ongoing game
+                                        </td>
+                                    </tr>
+
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="charts" style="width: 100%;">
+                        <div class="chart-box">
+                            <% if(portfolioUserId) { %>
+
+                                <h3>Portfolio progress for <span style="color: blue;"><%= portfolioUserName %></span> </h3>
+                                <% if(portfolio.length > 0) { %>
+
+                                    <canvas id="tradingProgressChart"></canvas>
+
+                                <% } else {  %>
+                                    <p> Graphical display of portfolio performance over the duration of the simulation will show here </p>
+                                <% } %>
+                            
+                            <% } else {  %>
+
+                                <h3>Select user on the left table to show the graphical portfolio progress </h3>
+
+                            <% } %>
+                            
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+               
+
+                
+                
+            </div>
+
+<!-- Add Chart.js library for rendering charts -->
+           
+            </div>
+        </main>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sample data for charts
+        const purchaseData = {
+            labels: ["Microsoft", "Apple", "Google", "Uber"],
+            datasets: [{
+                label: "Purchases",
+                data: [20, 35, 10, 25],
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1
+            }]
+        };
+
+        const sellingData = {
+            labels: ["2.00 pm", "3.24 pm", "4.32 pm", "6.00 pm"],
+            datasets: [{
+                label: "Selling",
+                data: [20, 50, 40, 30],
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1
+            }]
+        };
+
+        // Initialize charts
+        const purchaseCtx = document.getElementById("purchaseChart").getContext("2d");
+        new Chart(purchaseCtx, {
+            type: "bar",
+            data: purchaseData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+
+        const sellingCtx = document.getElementById("sellingChart").getContext("2d");
+        new Chart(sellingCtx, {
+            type: "line",
+            data: sellingData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
+    <%- include("inc-count-down-script.ejs", {onComplete: '/admin/home', isAdmin: true}) %>
+    <%- include("inc-refresh-game-session.ejs") %>
+
+
+    <script> 
+
+        function openAndReload(e) {
+            e.preventDefault();
+            // Open the new tab and store the reference
+            const newTab = window.open('/admin/start-game', '_blank');
+
+            if (newTab) {
+                // Attach an event listener to detect when the new tab loads
+                newTab.onload = function () {
+                    console.log('New tab is fully loaded');
+                    // Refresh the current page
+                    window.location.reload();
+                };
+            } else {
+                console.error('Failed to open the new tab');
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

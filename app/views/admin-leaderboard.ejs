@@ -1,0 +1,143 @@
+<%- include("admin-head.ejs") %>
+<link rel="stylesheet" href="/css/game_config.css"> <!-- Link to CSS for styling -->
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%- include("admin-sidebar-items.ejs") %>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="search-container">
+                    <i class="menu-icon">☰</i>
+                    <input type="text" placeholder="Search here" class="search-bar">
+                    <i class="search-icon">🔍</i>
+                </div>
+                <div class="user-profile">
+                    <img src="/path-to-profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+                </div>
+            </header>
+
+            <%- include("inc-alert-messages.ejs") %>
+    
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content">
+               <!-- home.ejs -->
+                
+               <!-- MAIN CONTENT STARTS FROM HERE -->
+                 <!-- Content here -->
+                <div class="game-config-container">
+                    
+                    <!-- Right Section: Game Session Management -->
+
+                    <div id="dynamic-content">
+                        <div class="home-container">
+                             
+                         <form action="">
+                             <div class="form-group">
+                                 <label for="games" style="font-size: 15px; margin-bottom: 10px;"> Select game</label>
+                                 <br>
+                                 <select class="form-control" id="game-sessions" >
+                                     
+                                     <% for(const s of gameSessions) { %>
+                                         <option value="<%= s['_id'] %>" <%= gameId == s['_id'] ? 'selected' : ''%> > <%= moment(s['createdAt']) %>  </option>
+                                     <% } %>
+         
+                                 </select>
+                             </div>
+                         </form>
+                             
+                                 <!-- Stock Card 2 -->
+         
+                                 <div class="user-list" style="margin-top: 20px; width: 100%; background-color: white; box-shadow: #42434d; padding: 10px; border-radius: 5px;">
+                                     <h3>Leaderboard</h3>
+                                 
+                                     <table class="user-table">
+                                         <thead>
+                                             <tr>
+                                                 <th>Name</th>
+                                                 <th>AAPL</th>
+                                                 <th>GOOGL</th>
+                                                 <th>MSFT</th>
+                                                 <th>Available Balance</th>
+                                                 <th>Total Balance</th>
+                                             </tr>
+                                         </thead>
+                                         <tbody id="user-table-body">
+                                             <!-- Sample data rows; replace with dynamic content as needed -->
+         
+                                             <% if(leaderBoard.length > 0) { %>
+                                                 <% for(const p of leaderBoard) { %>
+                                                     <tr>
+                                                         <td> <%= p['userName'] %> </td>
+                                                         <td> 
+                                                             <p>Shares: <%= p['AAPL'] %> </p>
+                                                             <p>Amount: $<%= p['AAPL_balance'].toFixed(2) %> </p>
+                                                         </td>
+                                                         <td>
+                                                             <p>Shares: <%= p['GOOGL'] %> </p>
+                                                             <p>Amount: $<%= p['GOOGL_balance'].toFixed(2) %> </p>
+                                                         </td>
+                                                         <td>
+                                                             <p>Shares: <%= p['MSFT'] %> </p>
+                                                             <p>Amount: $<%= p['MSFT_balance'].toFixed(2) %> </p>
+                                                         </td>
+                                                         <td>
+                                                             $<%= p['availableBalance'].toFixed(2) %>
+                                                         </td>
+                                                         <td>
+                                                             $ <strong style="font-size: 18px;"><%= p['currentBalance'].toFixed(2)  %></strong>
+                                                         </td>
+                                                         
+                                                     </tr>
+                                                 <% } %>
+                                             <% } else { %>
+         
+                                                 <tr>
+                                                     <td colspan="6">
+                                                         Leaderboard will show once users join ongoing game
+                                                     </td>
+                                                 </tr>
+         
+                                             <% } %>
+                                         </tbody>
+                                     </table>
+                                 </div>
+                                  <!--  End of leader board list -->
+         
+                         </div>
+                     </div>
+                    
+                </div>
+        <!-- End of content -->
+               <!-- MAIN CONTENT ENDS  HERE -->
+
+            </div>
+        </main>
+
+       
+    </div>
+
+     <!-- Add Chart.js library for rendering charts -->
+     <script>
+
+        const selectElement = document.getElementById('game-sessions');
+        selectElement.addEventListener('change', function () {
+            // Get the selected value
+            const selectedValue = selectElement.value;
+            // // Display the selected value
+            // outputElement.textContent = `You selected: ${selectedValue}`;
+            console.log(`Selected value: ${selectedValue}`);
+            window.location.href = "/leaderboards/admin?gameId=" + selectedValue
+        });
+        
+     </script>
+    
+</body>
+</html>
+
+

@@ -1,0 +1,101 @@
+/* Main container for the two-segment layout */
+.users-page-container {
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+/* Right Segment: User Details */
+.user-details {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-details h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.user-details p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Left Segment: User List */
+.user-list {
+    flex: 2;
+}
+
+/* User List Heading */
+.user-list h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+/* Search Box Container Styling */
+.user-search-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#user-search {
+    padding: 10px;
+    width: 60%;
+    max-width: 400px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+#user-search:focus {
+    outline: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* User Table Styling */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-table th, .user-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.user-table th {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* View Button Styling */
+.user-table button {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-table button:hover {
+    background-color: #0056b3;
+}

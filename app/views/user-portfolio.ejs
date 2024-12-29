@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/css/user/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%- include("user-sidebar-items.ejs") %>
+    
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="search-container">
+                    <i class="menu-icon">☰</i>
+                    <input type="text" placeholder="Search here" class="search-bar">
+                    <i class="search-icon">🔍</i>
+                </div>
+                <div class="user-profile">
+                    <img src="/path-to-profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+                </div>
+            </header>
+
+            <%- include("inc-alert-messages.ejs") %>
+    
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content">
+               <div class="home-container">
+
+                <form action="">
+                    <div class="form-group">
+                        <label for="games" style="font-size: 15px; margin-bottom: 10px;"> Select game (Sorted: latest game at top)</label>
+                        <br>
+                        <select class="form-control" id="game-sessions" >
+                            
+                            <% for(const s of gameSessions) { %>
+                                <option value="<%= s['_id'] %>" <%= gameId == s['_id'] ? 'selected' : ''%> > <%= moment(s['createdAt']) %>  </option>
+                            <% } %>
+
+                        </select>
+                    </div>
+                </form>
+
+                <div style="display: flex; gap: 10px;">
+
+                    <div class="user-list" style="margin-top: 20px; width: 100%; background-color: white; box-shadow: #42434d; padding: 10px; border-radius: 5px;">
+                        <h3>My portfolio</h3>
+                    
+                        <table class="user-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Minute(s)</th>
+                                    <th>AAPL</th>
+                                    <th>GOOGL</th>
+                                    <th>MSFT</th>
+                                    <th>Total Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-table-body">
+                                <!-- Sample data rows; replace with dynamic content as needed -->
+
+                                <% if(portfolio.length > 0) { %>
+                                    <% for(const p of portfolio) { %>
+                                        <tr>
+                                            <td> 
+                                                <%= p['userName'] %> 
+                                            </td>
+                                            <td> 
+                                                at <%= p['minuteAt'] %> min(s)
+                                             </td>
+                                            <td> 
+                                                <p>Amount: $<%= p['AAPL_balance'].toFixed(2) %> </p>
+                                            </td>
+                                            <td>
+                                                <p>Amount: $<%= p['GOOGL_balance'].toFixed(2) %> </p>
+                                            </td>
+                                            <td>
+                                                <p>Amount: $<%= p['MSFT_balance'].toFixed(2) %> </p>
+                                            </td>
+                                            <td>
+                                                $ <strong style="font-size: 18px;"><%= p['currentBalance'].toFixed(2)  %></strong>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                <% } else { %>
+
+                                    <tr>
+                                        <td colspan="6">
+                                            Display of user portfolio progress for a given game
+                                        </td>
+                                    </tr>
+
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="charts" style="width: 100%;">
+                        <div class="chart-box">
+                            <h3>Portfolio progress for <span style="color: blue;"><%= user['name'] %></span> </h3>
+                            <% if(portfolio.length > 0) { %>
+
+                                <canvas id="tradingProgressChart"></canvas>
+
+                            <% } else {  %>
+                                <p> Graphical display of portfolio performance over the duration of the simulation will show here </p>
+                            <% } %>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                    
+                    
+                        <!-- Stock Card 2 -->
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Add Chart.js library for rendering charts -->
+
+    <script>
+
+        const selectElement = document.getElementById('game-sessions');
+        selectElement.addEventListener('change', function () {
+            // Get the selected value
+            const selectedValue = selectElement.value;
+            // // Display the selected value
+            // outputElement.textContent = `You selected: ${selectedValue}`;
+            console.log(`Selected value: ${selectedValue}`);
+            window.location.href = "/leaderboards/user?gameId=" + selectedValue
+            window.location.href = `/portfolios/user?userId=<%= user['userId'] %>&userName=<%= user['name'] %>&gameId=${selectedValue}`
+        });
+        
+     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        const portfolioRecords = <%- JSON.stringify(portfolio) %>; // Pass the array from the server to JavaScript
+        // Parse it back into an array
+        // const dataArray = JSON.parse(portfolioRecords);
+
+        console.log("portfolioRecords", portfolioRecords);
+        
+
+        // Sample data for charts
+        const tradingProgressData = {
+            labels: portfolioRecords.map(item => `${item['minuteAt']} min(s)`),
+            datasets: [{
+                label: "Balance - $",
+                data: portfolioRecords.map(item => item['currentBalance']),
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1
+            }]
+        };
+
+        // Initialize chart
+        const tradingCtx = document.getElementById("tradingProgressChart").getContext("2d");
+        new Chart(tradingCtx, {
+            type: "line",
+            data: tradingProgressData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                }
+            }
+        });
+    </script>
+
+
+</body>
+</html>

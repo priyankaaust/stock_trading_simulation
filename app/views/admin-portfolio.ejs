@@ -1,0 +1,50 @@
+<%- include("admin-head.ejs") %>
+<link rel="stylesheet" href="/css/game_config.css"> <!-- Link to CSS for styling -->
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%- include("admin-sidebar-items.ejs") %>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="search-container">
+                    <i class="menu-icon">☰</i>
+                    <input type="text" placeholder="Search here" class="search-bar">
+                    <i class="search-icon">🔍</i>
+                </div>
+                <div class="user-profile">
+                    <img src="/path-to-profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+                </div>
+            </header>
+
+            <%- include("inc-alert-messages.ejs") %>
+    
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content">
+               <!-- home.ejs -->
+                
+               <!-- MAIN CONTENT STARTS FROM HERE -->
+                 <!-- Content here -->
+                <div class="game-config-container">
+                    
+                    <!-- Right Section: Game Session Management -->
+                    
+                </div>
+        <!-- End of content -->
+               <!-- MAIN CONTENT ENDS  HERE -->
+
+            </div>
+        </main>
+
+       
+    </div>
+    
+</body>
+</html>
+
+

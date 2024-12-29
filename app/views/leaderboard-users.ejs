@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="/css/admin_dashboard_style.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="users-page-container">
+        <!-- Left Segment: User Details -->
+        <div class="user-details">
+            <h3>User Details</h3>
+            <div id="user-details-content">
+                <!-- Default message when no user is selected -->
+                <p>Select a user to view details</p>
+            </div>
+        </div>
+
+        <!-- Right Segment: User List Table -->
+        <div class="user-list">
+            <h2>User Management</h2>
+            
+            <!-- Search Box at the Top of the User Management Section -->
+            <div class="user-search-container">
+                <input type="text" id="user-search" placeholder="Search by name..." onkeyup="filterUsers()" />
+            </div>
+
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Country</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body">
+                    <!-- Sample data rows; replace with dynamic content as needed -->
+                    <tr>
+                        <td>john_doe</td>
+                        <td>john@example.com</td>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>USA</td>
+                        <td>
+                            <button onclick="viewUser(1)">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>jane_smith</td>
+                        <td>jane@example.com</td>
+                        <td>Jane</td>
+                        <td>Smith</td>
+                        <td>Canada</td>
+                        <td>
+                            <button onclick="viewUser(2)">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>sam_jones</td>
+                        <td>sam@example.com</td>
+                        <td>Sam</td>
+                        <td>Jones</td>
+                        <td>UK</td>
+                        <td>
+                            <button onclick="viewUser(3)">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function viewUser(userId) {
+            const userDetails = {
+                1: { username: "john_doe", email: "john@example.com", first_name: "John", last_name: "Doe", country: "USA" },
+                2: { username: "jane_smith", email: "jane@example.com", first_name: "Jane", last_name: "Smith", country: "Canada" },
+                3: { username: "sam_jones", email: "sam@example.com", first_name: "Sam", last_name: "Jones", country: "UK" }
+            };
+
+            const user = userDetails[userId];
+            const detailsContainer = document.getElementById('user-details-content');
+            if (user) {
+                detailsContainer.innerHTML = `
+                    <p><strong>Username:</strong> ${user.username}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <p><strong>First Name:</strong> ${user.first_name}</p>
+                    <p><strong>Last Name:</strong> ${user.last_name}</p>
+                    <p><strong>Country:</strong> ${user.country}</p>
+                `;
+            } else {
+                detailsContainer.innerHTML = '<p>User not found.</p>';
+            }
+        }
+
+        function filterUsers() {
+            const input = document.getElementById('user-search');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('user-table-body');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const firstName = cells[2].textContent || cells[2].innerText;
+                const lastName = cells[3].textContent || cells[3].innerText;
+
+                if (firstName.toLowerCase().indexOf(filter) > -1 || lastName.toLowerCase().indexOf(filter) > -1) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

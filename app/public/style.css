@@ -1,0 +1,143 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/* Center container styles for login and dashboard */
+.login-container, .dashboard-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Headings */
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label and input fields */
+label {
+
+    margin-bottom: 8px;
+    color: #555555e8;
+}
+
+input[type="text"], input[type="password"], select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Button styling */
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Dashboard link styling */
+a.dashboard-button {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a.dashboard-button:hover {
+    background-color: #218838;
+}
+
+/* Landing page body styling */
+.landing-body {
+    background-color: #121212; /* Dark background */
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Landing page container */
+.landing-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Heading styling */
+header h1 {
+    font-size: 2.5em;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+/* Button group styling */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Button styling */
+.button {
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.admin-button {
+    background-color: #007bff; /* Bright blue for admin */
+}
+
+.admin-button:hover {
+    background-color: #0056b3;
+}
+
+.user-button {
+    background-color: #28a745; /* Bright green for user */
+}
+
+.user-button:hover {
+    background-color: #218838;
+}

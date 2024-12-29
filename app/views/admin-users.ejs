@@ -1,0 +1,81 @@
+<%- include("admin-head.ejs") %>
+<link rel="stylesheet" href="/css/game_config.css"> <!-- Link to CSS for styling -->
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <%- include("admin-sidebar-items.ejs") %>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="dashboard-header">
+                <div class="search-container">
+                    <i class="menu-icon">☰</i>
+                    <input type="text" placeholder="Search here" class="search-bar">
+                    <i class="search-icon">🔍</i>
+                </div>
+                <div class="user-profile">
+                    <img src="/path-to-profile-pic.jpg" alt="Profile Picture" class="profile-pic">
+                </div>
+            </header>
+
+            <%- include("inc-alert-messages.ejs") %>
+    
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content">
+               <!-- home.ejs -->
+                
+               <!-- MAIN CONTENT STARTS FROM HERE -->
+                 <!-- Content here -->
+
+                 <div class="user-list" style="margin-top: 20px; width: 100%; background-color: white; box-shadow: #42434d; padding: 10px; border-radius: 5px;">
+                    <h3>Users</h3>
+                
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="user-table-body">
+                            <!-- Sample data rows; replace with dynamic content as needed -->
+
+                            <% if(users.length > 0) { %>
+                                <% for(const p of users) { %>
+                                    <tr>
+                                        <td> <%= p['name'] %> </td>
+                                        <td> <%= p['email'] %> </td>
+                                        <td> <%= p['phone'] %> </td>
+                                    </tr>
+                                <% } %>
+                            <% } else { %>
+
+                                <tr>
+                                    <td colspan="7">
+                                        Leaderboard will show once users join ongoing game
+                                    </td>
+                                </tr>
+
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                
+        <!-- End of content -->
+               <!-- MAIN CONTENT ENDS  HERE -->
+
+            </div>
+        </main>
+
+       
+    </div>
+    
+</body>
+</html>
+
+

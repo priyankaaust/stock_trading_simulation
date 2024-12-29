@@ -1,0 +1,114 @@
+<script>
+  // Get endTime passed from the server, which could be null
+  
+
+  const onComplete = "<%= onComplete %>"
+  const isAdmin = "<%= isAdmin ? `TRUE` : `FALSE` %>" == `TRUE`
+  console.log("isAdmin", isAdmin);
+  
+  let previousMinute = null; // To track the last minute
+  let totalMinutes = null; // To store the total countdown duration
+  
+  const endTime = "<%=  activeGameSession ? activeGameSession.endTime : null %>";
+  const startTime = "<%=  activeGameSession ? activeGameSession.startTime : null %>";
+  const gameSessionId = "<%=  activeGameSession ? activeGameSession['_id'] : null %>";
+  const countDownElement = document.getElementById("countdown")
+  const ellapsedElement = document.getElementById("ellapsed")
+
+  console.log("endTime: ", endTime);
+  console.log("startTime: ", startTime);
+
+  if (endTime && endTime !== null) {
+
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = Date.parse(endTime) - now;
+
+        if (totalMinutes === null) {
+            totalMinutes = Math.ceil((Date.parse(endTime) - Date.parse(startTime)) / (1000 * 60)); // Calculate total countdown minutes
+        }
+
+        if (timeLeft >= 0) {
+            // Calculate minutes left
+            const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            const timer = minutesLeft + "m " + seconds + "s ";
+            // console.log("timer ", timer);
+
+            // Calculate elapsed minutes
+            // console.log("total minutes ", totalMinutes);
+            // console.log("minutes left ", minutesLeft);
+            
+            const elapsedMinutes = totalMinutes - minutesLeft;
+
+            // Trigger method at the start of each minute
+            if (minutesLeft !== previousMinute) {
+                previousMinute = minutesLeft;
+
+                // Log minutes left and elapsed minutes
+                console.log("Minute changed to:", minutesLeft, "(elapsed:", elapsedMinutes, ")");
+                onMinuteChange(gameSessionId, minutesLeft, elapsedMinutes); // Call your trigger function
+            }
+
+            // Display the result in the div with id="countdown"
+            if (countDownElement) {
+                countDownElement.innerHTML = timer;                
+            }
+            if(ellapsedElement) {
+              ellapsedElement.innerHTML = elapsedMinutes + " minute(s) ago"
+            }
+
+        } else {
+            console.log("clearing interval ...");
+            clearInterval(countdownInterval);
+
+            window.location.href = onComplete;
+        }
+    }
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+  } else {
+    
+    if(countDownElement)  {
+      countDownElement.innerHTML = "Countdown not available";
+    }
+    
+  }
+
+  let initialized = false
+
+  // Method to trigger on minute change
+  function onMinuteChange(gameSessionId, minutesLeft, elapsedMinutes) {
+    console.log(`Minute changed: ${minutesLeft} minutes left, ${elapsedMinutes} minutes elapsed`);
+      if(isAdmin) {
+        // admin
+        fetch(`/admin/refresh-game-session?gameSessionId=${gameSessionId}&minute=${elapsedMinutes}`, {
+                method: 'GET'
+        }).then(response => {
+            return response.json()
+        } ).then(data => {
+            console.log(data);
+        }).catch(error =>  {
+            console.log(error);
+        });
+      } else {
+        // user 
+        // window.location.reload();
+        if(initialized) {
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000)
+        }
+        
+      }
+      // Add your custom logic here
+      initialized = true;
+  }
+
+
+
+</script>

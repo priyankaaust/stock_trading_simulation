@@ -1,0 +1,106 @@
+/* Main container for the two-segment layout */
+.stocks-page-container {
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+/* Left Section: Add Stock / Filter Form */
+.stock-form {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stock-form h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.stock-form label {
+    display: block;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #555;
+}
+
+.stock-form input[type="text"],
+.stock-form input[type="number"],
+.stock-form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.stock-form button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.stock-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Right Section: Stock List */
+.stock-list {
+    flex: 2;
+}
+
+.stock-list h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Stock Table Styling */
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.stock-table th, .stock-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.stock-table th {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.stock-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Edit Button Styling */
+.stock-table button {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.stock-table button:hover {
+    background-color: #0056b3;
+}

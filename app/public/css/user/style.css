@@ -1,0 +1,363 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/* Main Dashboard Container */
+.dashboard-container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #121212; /* Dark theme for sidebar */
+    color: #fff;
+    position: fixed;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    color: #e60000; /* Highlighted red for TeamJ Stocks branding */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a.active,
+.sidebar ul li a:hover {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: 250px; /* Matches the width of sidebar */
+    padding: 20px;
+    width: 100%;
+}
+
+/* Dashboard Header Styling */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 300px;
+    margin-left: 10px;
+}
+
+.menu-icon,
+.search-icon {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+/* Dynamic Content Styling */
+#dynamic-content {
+    padding-top: 20px;
+}
+
+/* Metrics Section for Home Page */
+.metrics {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.metric-box {
+    background-color: #f8f9fa;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.metric-box span {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Charts Section */
+.charts {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.chart-box {
+    flex: 1;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Leaderboard Section */
+.leaderboard {
+    margin-top: 30px;
+}
+
+.leaderboard h3 {
+    text-align: left;
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.leaderboard ul {
+    list-style: none;
+    padding: 0;
+}
+
+.leaderboard ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard ul li .rank-name {
+    font-weight: bold;
+}
+
+.leaderboard ul li .rank-score {
+    color: #666;
+}
+
+/* Table Styles for Portfolio and Stocks Pages */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Buttons for Actions */
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Forms Styling for Portfolio and Settings Pages */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+form label {
+    text-align: left;
+    color: #555;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="date"],
+form input[type="time"], 
+form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form button {
+    align-self: flex-start;
+    padding: 10px 20px;
+}
+
+/* Container for stock cards */
+.stock-card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+    /* padding: 20px; */
+    box-sizing: border-box;
+  }
+  
+  /* Stock card styling */
+  .stock-card {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    /* max-width: 300px; */
+    margin: 0 auto;
+  }
+  
+  /* Individual colors for each card */
+  .stock-card-1 {
+    background-color: #4CAF50; /* Green */
+  }
+  .stock-card-2 {
+    background-color: #2196F3; /* Blue */
+  }
+  .stock-card-3 {
+    background-color: #FF9800; /* Orange */
+  }
+  
+  /* Stock card text styling */
+  .stock-company {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .stock-ticker,
+  .stock-price {
+    font-size: 1em;
+    margin: 5px 0;
+  }
+  
+  /* Action buttons styling */
+  .stock-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    margin-top: 15px;
+  }
+  
+  /* Button styling with complementary colors */
+  .buy-button,
+  .sell-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  /* Complementary button colors for each card */
+  .stock-card-1 .buy-button {
+    background-color: #388E3C; /* Darker green */
+  }
+  .stock-card-1 .sell-button {
+    background-color: #fff; /* Dark red */
+    color: black;
+  }
+  
+  .stock-card-2 .buy-button {
+    background-color: #1565C0; /* Darker blue */
+  }
+  .stock-card-2 .sell-button {
+    background-color: #fff; /* Dark red */
+    color: black;
+  }
+  
+  .stock-card-3 .buy-button {
+    background-color: #EF6C00; /* Darker orange */
+  }
+  .stock-card-3 .sell-button {
+    background-color: #fff; /* Darker brownish red */
+    color: black;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .stock-card-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .stock-card {
+      max-width: 90%;
+    }
+  }
+  
+
+  #start-session-btn {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    text-decoration: none;
+}
